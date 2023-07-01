@@ -1,5 +1,15 @@
+#pragma once
 #ifndef PASSGEN_FUNCTIONS_H
 #define PASSGEN_FUNCTIONS_H
+#if defined(_WIN32)
+    #include <windows.h>
+#elif defined(__APPLE__)
+    #include <ApplicationServices/ApplicationServices.h>
+#elif defined(__linux__)
+    #include <unistd.h>
+    #include <fcntl.h>
+    #include <cstring>
+#endif
 #include <iostream>
 #include <random>
 #include "ostream"
@@ -8,7 +18,6 @@
 #include "fstream"
 #include "ctime"
 #include <chrono>
-#include <variant>
 
 using namespace std;
 random_device seed;
@@ -67,7 +76,13 @@ inline string ezPass(short numOfChars){
 }
 inline void writeToFile(const string& password,const string& fileName){
     filesystem::path currentPath = filesystem::current_path();
-    string path = currentPath.string()+"\\"+fileName;
+    #if defined (__linux__)
+        string path = currentPath.string()+"/"+fileName;
+    #elif defined(_WIN32)
+            string path = currentPath.string()+"\\"+fileName;
+    #elif defined (__APPLE__)
+        string path = currentPath.string()+"/"+fileName;
+    #endif
     ofstream vault(path, ios::app);
     if(vault.is_open()){
         vault<<password<<"  Generated at=>> "<<getCurrentTime()<<endl;
@@ -77,4 +92,4 @@ inline void writeToFile(const string& password,const string& fileName){
     else
         cout<<"***Failed to Open/Create: "<<fileName<<"***";
 }
-#endif //PASSGEN_FUNCTIONS_H
+#endif 

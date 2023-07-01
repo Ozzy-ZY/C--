@@ -8,7 +8,7 @@ int main(int argc,char** argv) {
     cin>>fileName;
     cout<<"enter the desired Length: ";
     cin>>numOfChars;
-    cout<<"How hard do you want it bae\n Africa->1\n America->2\nAsia->3\n";
+    cout<<"How hard do you want it bae\n*Africa->1\n*America->2\n*Asia->3\n";
     short hardness;
     cin>>hardness;
     if(hardness == 1){
