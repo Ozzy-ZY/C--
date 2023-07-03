@@ -18,12 +18,14 @@
 #include "fstream"
 #include "ctime"
 #include <chrono>
-
+#include <algorithm>
+#include <cctype>
+#include <unordered_map>
 using namespace std;
-random_device seed;
+
 #define Fast std::ios_base::sync_with_stdio(false);
 #define Srengine default_random_engine engine (seed());
-
+random_device seed;
 inline string getCurrentTime() {
     chrono::system_clock::time_point now = chrono::system_clock::now();
     time_t currentTime = chrono::system_clock::to_time_t(now);
