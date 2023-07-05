@@ -1,2 +1,3 @@
 # PasswordGen
-not yet ready for Users 
+kinda ready now
+maybe Beta!
