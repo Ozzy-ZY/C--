@@ -6,8 +6,8 @@
 #elif defined(__APPLE__)
     #include <ApplicationServices/ApplicationServices.h>
 #elif defined(__linux__)
-    #include <unistd.h>
-    #include <fcntl.h>
+    #include <X11/Xlib.h>
+    #include <X11/Xatom.h>
     #include <cstring>
 #endif
 #include <iostream>
@@ -76,7 +76,7 @@ inline string ezPass(short numOfChars){
     }
     return pass;
 }
-inline void writeToFile(const string& password,const string& fileName){
+inline void writeToFile(const string& name,const string& password,const string& fileName){
     filesystem::path currentPath = filesystem::current_path();
     #if defined (__linux__)
         string path = currentPath.string()+"/"+fileName;
@@ -87,7 +87,7 @@ inline void writeToFile(const string& password,const string& fileName){
     #endif
     ofstream vault(path, ios::app);
     if(vault.is_open()){
-        vault<<password<<"  Generated at=>> "<<getCurrentTime()<<endl;
+        vault<< name <<" " << password << "  Generated at=>> "<<getCurrentTime()<<endl;
         vault.close();
         cout<<"---Successful---";
     }
