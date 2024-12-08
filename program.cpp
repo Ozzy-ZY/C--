@@ -17,7 +17,7 @@ void normWay(string name){
     cin>>fileName;
     cout<<"enter the desired Length: ";
     cin>>numOfChars;
-    cout<<"How hard do you want it bae\n*Africa->1\n*America->2\n*Asia->3\n";
+    cout<<"Hardness{1: HardAF,\n Mid,\nEzz\n}\n";
     short hardness;
     cin>>hardness;
     if(hardness == 1){
